@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import CourseForm from './CourseForm';
 import { newCourse } from '../../../tools/mockData';
 
-function ManageCoursePage({
+const ManageCoursePage = ({
   courses,
   authors,
   loadAuthors,
@@ -14,7 +14,7 @@ function ManageCoursePage({
   saveCourse,
   history,
   ...props
-}) {
+}) => {
   const [course, setCourse] = useState({ ...props.course });
   const [errors, setErrors] = useState({});
 
@@ -34,20 +34,20 @@ function ManageCoursePage({
     }
   }, [props.course]);
 
-  function handleChange(event) {
+  const handleChange = event => {
     const { name, value } = event.target;
     setCourse(prevCourse => ({
       ...prevCourse,
       [name]: name === 'authorId' ? parseInt(value, 10) : value,
     }));
-  }
+  };
 
-  function handleSave(event) {
+  const handleSave = event => {
     event.preventDefault();
     saveCourse(course).then(() => {
       history.push('/courses');
     });
-  }
+  };
 
   return (
     <CourseForm
@@ -58,7 +58,7 @@ function ManageCoursePage({
       onSave={handleSave}
     />
   );
-}
+};
 
 ManageCoursePage.propTypes = {
   course: PropTypes.object.isRequired,
@@ -70,11 +70,11 @@ ManageCoursePage.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export function getCourseBySlug(courses, slug) {
+export const getCourseBySlug = (courses, slug) => {
   return courses.find(course => course.slug === slug) || null;
-}
+};
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   const slug = ownProps.match.params.slug;
   const course =
     slug && state.courses.length > 0
@@ -85,7 +85,7 @@ function mapStateToProps(state, ownProps) {
     courses: state.courses,
     authors: state.authors,
   };
-}
+};
 
 const mapDispatchToProps = {
   loadCourses,
