@@ -6,17 +6,17 @@ export const loadCoursesSuccess = courses => {
   return { type: types.LOAD_COURSES_SUCCESS, courses };
 };
 
-export function createCourseSuccess(course) {
+export const createCourseSuccess = course => {
   return { type: types.CREATE_COURSE_SUCCESS, course };
-}
+};
 
-export function updateCourseSuccess(course) {
+export const updateCourseSuccess = course => {
   return { type: types.UPDATE_COURSE_SUCCESS, course };
-}
+};
 
-export function deleteCourseOptimistic(course) {
+export const deleteCourseOptimistic = course => {
   return { type: types.DELETE_COURSE_OPTIMISTIC, course };
-}
+};
 
 export const loadCourses = () => {
   return async function (dispatch) {
