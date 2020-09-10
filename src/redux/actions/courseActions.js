@@ -10,14 +10,12 @@ export const loadCoursesSuccess = courses => {
 };
 
 export const loadCourses = () => {
-  return function (dispatch) {
-    return courseApi
-      .getCourses()
-      .then(courses => {
-        dispatch(loadCoursesSuccess(courses));
-      })
-      .catch(error => {
-        throw error;
-      });
+  return async function (dispatch) {
+    try {
+      const courses = await courseApi.getCourses();
+      dispatch(loadCoursesSuccess(courses));
+    } catch (error) {
+      throw error;
+    }
   };
 };
